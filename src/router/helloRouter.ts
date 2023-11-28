@@ -6,4 +6,8 @@ router.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
 });
 
+router.delete('/aa', (req: Request, res: Response) => {
+    res.send('Hello World!');
+});
+
 export default router;

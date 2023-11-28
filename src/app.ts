@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import helloRouter from './routers/helloRouter';
+import helloRouter from './router/helloRouter';
 
 const app = express();
  
