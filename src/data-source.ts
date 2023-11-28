@@ -11,8 +11,6 @@ export const connection = new DataSource({
   password: "123",
   database: "fdb",
   synchronize: true,
-  logging: true,
-  subscribers: [],
+  logging: false,
   entities: [Market],
-  migrations: [],
 })
