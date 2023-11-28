@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import marketRouter from './router/marketRouter';
+import storeRouter from './router/storeRouter';
 import "reflect-metadata";
 import { connection } from './data-source';
 
@@ -13,7 +13,7 @@ connection.initialize()
  
 app.use(express.json());
  
-app.use('/market', marketRouter);
+app.use('/store', storeRouter);
  
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send(error.message);
