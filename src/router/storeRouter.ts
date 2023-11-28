@@ -17,7 +17,6 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-    console.log("getting by id")
     const id = Number(req.params.id)
     const store = await connection.manager.findOneBy(Store, { id });
     res.send(store);
