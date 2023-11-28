@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { Market } from "./entity/Market"
 
 
 export const connection = new DataSource({
@@ -12,5 +13,6 @@ export const connection = new DataSource({
   synchronize: true,
   logging: true,
   subscribers: [],
+  entities: [Market],
   migrations: [],
 })

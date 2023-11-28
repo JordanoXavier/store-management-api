@@ -3,8 +3,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 @Entity()
 export class Market {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column()
-  name: string | undefined
+  name: string
 }

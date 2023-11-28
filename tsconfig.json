@@ -12,6 +12,7 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
   },
   "ts-node": { "transpileOnly": true }
 }
