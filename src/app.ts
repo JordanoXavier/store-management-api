@@ -1,12 +1,19 @@
 import express, { Request, Response, NextFunction } from 'express';
-import helloRouter from './router/helloRouter';
+import marketRouter from './router/marketRouter';
 import "reflect-metadata";
+import { connection } from './data-source';
 
 const app = express();
+
+
+connection.initialize()
+    .then(() => {
+    })
+    .catch((error) => console.log(error))
  
 app.use(express.json());
  
-app.use('/hello', helloRouter);
+app.use('/market', marketRouter);
  
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send(error.message);
