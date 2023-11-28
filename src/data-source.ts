@@ -1,7 +1,5 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Market } from "./entity/Market"
-
 
 export const connection = new DataSource({
   type: "mysql",
@@ -12,5 +10,5 @@ export const connection = new DataSource({
   database: "fdb",
   synchronize: true,
   logging: false,
-  entities: [Market],
+  entities: ["src/entity/**/*.ts"],
 })
