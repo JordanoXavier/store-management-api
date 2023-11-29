@@ -93,4 +93,16 @@ router.delete('/:id', async (req: Request, res: Response) => {
     res.send(result);
 });
 
+router.get('/:id/sales', async (req: Request, res: Response) => {
+    const id = Number(req.params.id)
+    const invoice = await connection.manager.findOneBy(Invoice, { id });
+    if(!invoice) {
+        res.status(404).send("Invoice not found");
+        return;
+    }
+
+    const sales = await connection.manager.findBy("Sale", { invoice });
+    res.send(sales);
+});
+
 export default router;
