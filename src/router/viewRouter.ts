@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
-import { Store } from '../entity/Store';
 import { connection } from '../data-source';
 
 const router = express.Router();
 
-router.get('/count-employee-in-site/', async (req: Request, res: Response) => {
+router.get('/count-employee-in-site/:storeId', async (req: Request, res: Response) => {
+    const { storeId } = req.params;
+
     const viewExistsQuery = `
         SELECT TABLE_NAME
         FROM INFORMATION_SCHEMA.VIEWS
@@ -27,11 +28,13 @@ router.get('/count-employee-in-site/', async (req: Request, res: Response) => {
 
     const employeesCountPerStore = await connection.query(`
         SELECT *
-        FROM employees_count_per_store;
+        FROM employees_count_per_store
+        WHERE store_id = ${storeId};
     `);
 
     res.send(employeesCountPerStore);
 });
+
 
 
 
