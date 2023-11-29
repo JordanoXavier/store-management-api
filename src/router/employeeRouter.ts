@@ -1,12 +1,23 @@
 import express, { Request, Response } from 'express';
 import { Employee } from '../entity/Employee';
 import { connection } from '../data-source';
+import { Store } from '../entity/Store';
 
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
     const employee = new Employee();
     employee.name = req.body.name;
+
+    if(req.body.storeId) {
+        const id = Number(req.body.storeId)
+        const store = await connection.manager.findOneBy(Store, { id });
+        if(!store) {
+            res.status(404).send("Store not found");
+            return;
+        }
+        employee.store = store;
+    }
     const result = await connection.manager.save(employee);
     res.send(result);
 });
@@ -28,6 +39,15 @@ router.put('/:id', async (req: Request, res: Response) => {
     if(!employee) {
         res.status(404).send("Employee not found");
         return;
+    }
+    if(req.body.storeId) {
+        const id = Number(req.body.storeId)
+        const store = await connection.manager.findOneBy(Store, { id });
+        if(!store) {
+            res.status(404).send("Store not found");
+            return;
+        }
+        employee.store = store;
     }
 
     employee.name = req.body.name;
