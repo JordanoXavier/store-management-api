@@ -35,7 +35,4 @@ router.get('/count-employee-in-site/:storeId', async (req: Request, res: Respons
     res.send(employeesCountPerStore);
 });
 
-
-
-
 export default router;
