@@ -4,6 +4,7 @@ import { connection } from './data-source';
 import storeRouter from './router/storeRouter';
 import employeeRouter from './router/employeeRouter';
 import invoiceRouter from './router/invoiceRouter';
+import saleRouter from './router/saleRouter';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/store', storeRouter);
 app.use("/employee", employeeRouter);
 app.use("/invoice", invoiceRouter);
+app.use("/sale", saleRouter);
  
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send(error.message);
