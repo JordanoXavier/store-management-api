@@ -5,6 +5,7 @@ import storeRouter from './router/storeRouter';
 import employeeRouter from './router/employeeRouter';
 import invoiceRouter from './router/invoiceRouter';
 import saleRouter from './router/saleRouter';
+import viewRouter from './router/viewRouter';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/store', storeRouter);
 app.use("/employee", employeeRouter);
 app.use("/invoice", invoiceRouter);
 app.use("/sale", saleRouter);
+app.use("/view", viewRouter);
  
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send(error.message);
