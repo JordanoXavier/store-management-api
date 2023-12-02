@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
     const sale = new Sale();
+    sale.materialName = req.body.materialName;
     sale.quantity = req.body.quantity;
     sale.unitValue = req.body.unitValue;
     sale.totalItemValue = req.body.totalItemValue;

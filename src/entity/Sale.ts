@@ -8,6 +8,9 @@ export class Sale {
     id: number
 
     @Column()
+    materialName: string
+
+    @Column()
     quantity: number
 
     @Column()
