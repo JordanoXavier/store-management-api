@@ -12,7 +12,4 @@ export class Store {
 
   @OneToMany(() => Employee, employee => employee.store)
   employees: Employee[]
-
-  @OneToMany(() => Invoice, invoice => invoice.store)
-  invoices: Invoice[]
 }

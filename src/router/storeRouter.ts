@@ -59,16 +59,6 @@ router.get('/:id/employees', async (req: Request, res: Response) => {
     res.send(employees);
 });
 
-router.get('/:id/invoices', async (req: Request, res: Response) => {
-    const id = Number(req.params.id)
-    const store = await connection.manager.findOneBy(Store, { id });
-    if(!store) {
-        res.status(404).send("Store not found");
-        return;
-    }
 
-    const invoices = await connection.manager.findBy("Invoice", { store });
-    res.send(invoices);
-});
 
 export default router;

@@ -23,9 +23,6 @@ export class Invoice {
     @ManyToOne(() => Employee, employee => employee.invoices)
     employee: Employee
 
-    @ManyToOne(() => Store , store => store.invoices)
-    store: Store
-
     @OneToMany(() => Sale, sale => sale.invoice)
     sales: Sale[]
 }
