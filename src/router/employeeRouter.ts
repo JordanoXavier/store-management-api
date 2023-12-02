@@ -18,6 +18,7 @@ router.post('/', async (req: Request, res: Response) => {
         }
         employee.store = store;
     }
+    employee.salesCount = 0;
     const result = await connection.manager.save(employee);
     res.send(result);
 });

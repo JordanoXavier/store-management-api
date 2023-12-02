@@ -42,9 +42,9 @@ router.post('/update-sales-count', async (req: Request, res: Response) => {
             AFTER INSERT ON sale
             FOR EACH ROW
             BEGIN
-                UPDATE Employee
+                UPDATE employee
                 SET salesCount = salesCount + 1
-                WHERE id = (SELECT employeeId FROM Invoice WHERE id = NEW.invoiceId);
+                WHERE id = (SELECT employeeId FROM invoice WHERE id = NEW.invoiceId);
             END;
         `;
 
@@ -53,9 +53,9 @@ router.post('/update-sales-count', async (req: Request, res: Response) => {
             AFTER DELETE ON sale
             FOR EACH ROW
             BEGIN
-                UPDATE Employee
+                UPDATE employee
                 SET salesCount = salesCount - 1
-                WHERE id = (SELECT employeeId FROM Invoice WHERE id = OLD.invoiceId);
+                WHERE id = (SELECT employeeId FROM invoice WHERE id = OLD.invoiceId);
             END;
         `;
 
