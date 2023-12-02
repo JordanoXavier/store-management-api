@@ -3,7 +3,7 @@ import { connection } from '../data-source';
 
 const router = express.Router();
 
-router.get('/count-employee-in-site/:storeId', async (req: Request, res: Response) => {
+router.get('/count-employee-in-store/:storeId', async (req: Request, res: Response) => {
     const { storeId } = req.params;
 
     const viewExistsQuery = `

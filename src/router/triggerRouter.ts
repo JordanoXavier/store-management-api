@@ -35,6 +35,40 @@ router.post('/delete-sales-cascade', async (req: Request, res: Response) => {
     }
 });
 
+router.post('/update-sales-count', async (req: Request, res: Response) => {
+    try {
+        const increaseSalesTriggerQuery = `
+            CREATE TRIGGER increase_sales_count_on_sale_create
+            AFTER INSERT ON sale
+            FOR EACH ROW
+            BEGIN
+                UPDATE Employee
+                SET salesCount = salesCount + 1
+                WHERE id = (SELECT employeeId FROM Invoice WHERE id = NEW.invoiceId);
+            END;
+        `;
+
+        const decreaseSalesTriggerQuery = `
+            CREATE TRIGGER decrease_sales_count_on_sale_delete
+            AFTER DELETE ON sale
+            FOR EACH ROW
+            BEGIN
+                UPDATE Employee
+                SET salesCount = salesCount - 1
+                WHERE id = (SELECT employeeId FROM Invoice WHERE id = OLD.invoiceId);
+            END;
+        `;
+
+        await connection.query(increaseSalesTriggerQuery);
+        await connection.query(decreaseSalesTriggerQuery);
+
+        res.status(200).send('Triggers criadas com sucesso.');
+    } catch (error) {
+        console.error('Erro ao criar as triggers:', error);
+        res.status(500).send('Erro ao criar as triggers.');
+    }
+});
+
 
 
 export default router;

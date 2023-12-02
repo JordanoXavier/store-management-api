@@ -10,6 +10,9 @@ export class Employee {
   @Column()
   name: string
 
+  @Column()
+  salesCount: number
+
   @ManyToOne(() => Store, store => store.employees)
   store: Store
 
