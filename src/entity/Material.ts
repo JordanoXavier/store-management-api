@@ -9,6 +9,6 @@ export class Material {
     @Column()
     name: string
 
-    @ManyToOne(() => Sale, sale => sale.material)
-    sale: Sale
+    @OneToMany(() => Sale, sale => sale.material)
+    sale: Sale[]
 }

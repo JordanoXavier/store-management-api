@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { connection } from '../data-source';
 import { Sale } from '../entity/Sale';
 import { Invoice } from '../entity/Invoice';
+import { Material } from '../entity/Material';
 
 const router = express.Router();
 
@@ -19,6 +20,15 @@ router.post('/', async (req: Request, res: Response) => {
             return;
         }
         sale.invoice = invoice;
+    }
+    if(req.body.materialId) {
+        const id = Number(req.body.materialId)
+        const material = await connection.manager.findOneBy(Material, { id });
+        if(!material) {
+            res.status(404).send("Material not found");
+            return;
+        }
+        sale.material = material;
     }
     
     const result = await connection.manager.save(sale);
@@ -56,6 +66,15 @@ router.put('/:id', async (req: Request, res: Response) => {
             return;
         }
         sale.invoice = invoice;
+    }
+    if(req.body.materialId) {
+        const id = Number(req.body.materialId)
+        const material = await connection.manager.findOneBy(Material, { id });
+        if(!material) {
+            res.status(404).send("Material not found");
+            return;
+        }
+        sale.material = material;
     }
     
     const result = await connection.manager.save(sale);

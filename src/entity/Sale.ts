@@ -22,7 +22,6 @@ export class Sale {
     @ManyToOne(() => Invoice, invoice => invoice.sales)
     invoice: Invoice
 
-    @OneToMany(() => Material, material => material.sale)
-    material: Material[]
-
+    @ManyToOne(() => Material, material => material.sale)
+    material: Material
 }
